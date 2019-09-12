@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   def index
     @entry = Entry.find(params[:record_id])
     @comments = Comment.where(entry_id: @entry.id).order(created_at: :asc).includes(:user)
-    render json: @comments, :include => {:user => {:only => %i[username]}}, status: :ok
+    render json: @comments, :include => {:user => {:only => %i[name]}}, status: :ok
   end
 
   def show
@@ -15,14 +15,14 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     if @comment.save
-      render json: @comment, :include => {:user => {:only => %i[username]}}, status: :created
+      render json: @comment, :include => {:user => {:only => %i[name]}}, status: :created
     end
   end
 
   def update
     @comment = Comment.find(params[:id]).includes(:user)
     if @comment.update_attributes(comment_params)
-      render json: @comment, :include => {:user => {:only => %i[username]}}, status: :ok
+      render json: @comment, :include => {:user => {:only => %i[name]}}, status: :ok
     end
   end
 

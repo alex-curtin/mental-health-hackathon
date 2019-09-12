@@ -15,7 +15,7 @@ class EntriesController < ApplicationController
 
   def recent
     @entries = Entry.limit(12).order(created_at: :desc).includes(:user)
-    render json: @entries, :include => {:user => {:only => %i[username]}}, status: :ok
+    render json: @entries, :include => {:user => {:only => %i[name]}}, status: :ok
   end
 
   def create
