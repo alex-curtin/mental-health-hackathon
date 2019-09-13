@@ -42,7 +42,7 @@ export const fetchEntry = async (user_id, id) => {
   return res.data;
 }
 
-export const createEntry = async (id, data) => {
+export const createEntry = async (data) => {
   const id = data.user_id;
   const res = await api.post(`/users/${id}/entries/`, data);
   return res.data;
