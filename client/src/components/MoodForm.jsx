@@ -21,7 +21,7 @@ const moodOptions = [
 
 export default function MoodForm(props) {
   return (
-    <div>
+    <div className="form-page">
       <form onSubmit={props.handleSubmit}>
         <label htmlFor="mood">How are you feeling:</label>
         <select

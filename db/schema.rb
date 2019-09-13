@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_13_164559) do
+ActiveRecord::Schema.define(version: 2019_09_13_183318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2019_09_13_164559) do
     t.string "category"
     t.string "title"
     t.string "details"
-    t.integer "mood"
+    t.string "mood"
     t.string "status"
     t.boolean "self_care"
     t.bigint "user_id"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2019_09_13_164559) do
     t.string "name"
     t.string "email"
     t.string "password_digest"
-    t.integer "mood"
+    t.string "mood"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
