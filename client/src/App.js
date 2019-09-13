@@ -13,7 +13,8 @@ import {
   loginUser,
   registerUser,
   verifyUser,
-  createEntry
+  createEntry,
+  fetchEntries
 } from './services/api-helper'
 import './App.css';
 
@@ -31,7 +32,7 @@ class App extends Component {
         type: '',
         title: '',
         details: '',
-        mood: 0,
+        mood: 'neutral',
         status: 'incomplete',
         self_care: true,
         user_id: '',
@@ -87,7 +88,7 @@ class App extends Component {
     }));
   }
 
-  //--------TaskForm--------//
+  //--------TASKS--------//
   entryHandleChange = (e) => {
     const { name, value } = e.target;
     this.setState(prevState => ({
@@ -98,12 +99,26 @@ class App extends Component {
     }));
   }
 
-  taskHandleSubmit = async (data) => {
+  taskHandleSubmit = async (e) => {
+    e.preventDefault();
+    this.setState(prevState => ({
+      entryFormData: {
+        ...prevState.entryFormData,
+        user_id: this.state.currentUser.id,
+        type: task,
+      }
+    }))
+    const data = this.state.entryFormData;
+    const id = this.state.currentUser.id
     const task = await createEntry(data);
     this.setState(prevState => ({
       tasks: [...prevState.tasks, task]
     }))
-    this.props.history.push('/tasks');
+    // this.props.history.push('/tasks');
+  }
+
+  loadTasks = async () => {
+    const tasks = await fetchEntries();
   }
 
   //----MoodForm----//
@@ -114,6 +129,8 @@ class App extends Component {
       mood: mood,
     })
   }
+
+
 
   render() {
     return (
@@ -146,13 +163,19 @@ class App extends Component {
           <TaskForm
             formData={this.state.entryFormData}
             handleChange={this.entryHandleChange}
+            handleSubmit={this.taskHandleSubmit}
           />
         )} />
         <Route exact path="/set_mood" render={() => (
           <MoodForm
             formData={this.state.entryFormData}
             handleChange={this.entryHandleChange}
-            handleSubmit={this.taskHandleSubmit}
+            handleSubmit={this.moodHandleSubmit}
+          />
+        )} />
+        <Route exact path="/users/:id/tasks" render={() => (
+          <TaskList
+            loadTasks={this.loadTasks}
           />
         )} />
       </div>
