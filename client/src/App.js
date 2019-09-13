@@ -6,13 +6,15 @@ import Login from './components/Login'
 import Register from './components/Register'
 import Header from './components/Header';
 import TaskForm from './components/TaskForm';
+import MoodForm from './components/MoodForm';
 import TaskList from './components/TaskList';
 
 import {
   loginUser,
   registerUser,
   verifyUser,
-  createEntry
+  createEntry,
+  fetchEntries
 } from './services/api-helper'
 import './App.css';
 
@@ -30,12 +32,13 @@ class App extends Component {
         type: '',
         title: '',
         details: '',
-        mood: 0,
+        mood: 'neutral',
         status: 'incomplete',
         self_care: true,
         user_id: '',
       },
       tasks: [],
+      mood: '',
     };
   }
 
@@ -85,7 +88,7 @@ class App extends Component {
     }));
   }
 
-  //--------TaskForm--------//
+  //--------TASKS--------//
   entryHandleChange = (e) => {
     const { name, value } = e.target;
     this.setState(prevState => ({
@@ -96,13 +99,38 @@ class App extends Component {
     }));
   }
 
-  taskHandleSubmit = async (data) => {
+  taskHandleSubmit = async (e) => {
+    e.preventDefault();
+    this.setState(prevState => ({
+      entryFormData: {
+        ...prevState.entryFormData,
+        user_id: this.state.currentUser.id,
+        type: task,
+      }
+    }))
+    const data = this.state.entryFormData;
+    const id = this.state.currentUser.id
     const task = await createEntry(data);
     this.setState(prevState => ({
       tasks: [...prevState.tasks, task]
     }))
-    this.props.history.push('/tasks')
+    // this.props.history.push('/tasks');
   }
+
+  loadTasks = async () => {
+    const tasks = await fetchEntries();
+  }
+
+  //----MoodForm----//
+  moodHandleSubmit = async (data) => {
+    const mood = await createEntry(data);
+    //update user mood
+    this.setState({
+      mood: mood,
+    })
+  }
+
+
 
   render() {
     return (
@@ -135,6 +163,19 @@ class App extends Component {
           <TaskForm
             formData={this.state.entryFormData}
             handleChange={this.entryHandleChange}
+            handleSubmit={this.taskHandleSubmit}
+          />
+        )} />
+        <Route exact path="/set_mood" render={() => (
+          <MoodForm
+            formData={this.state.entryFormData}
+            handleChange={this.entryHandleChange}
+            handleSubmit={this.moodHandleSubmit}
+          />
+        )} />
+        <Route exact path="/users/:id/tasks" render={() => (
+          <TaskList
+            loadTasks={this.loadTasks}
           />
         )} />
       </div>

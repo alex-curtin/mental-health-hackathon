@@ -19,7 +19,7 @@ class EntriesController < ApplicationController
   end
 
   def create
-    @entry = Entry.new(record_params)
+    @entry = Entry.new(entry_params)
     if @entry.save
       render json: @entry, status: :created
     end
