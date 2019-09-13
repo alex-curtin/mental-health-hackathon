@@ -8,6 +8,7 @@ import Header from './components/Header';
 import TaskForm from './components/TaskForm';
 import MoodForm from './components/MoodForm';
 import TaskList from './components/TaskList';
+import Footer from './components/Footer';
 
 import {
   loginUser,
@@ -35,7 +36,7 @@ class App extends Component {
         mood: 'neutral',
         status: 'incomplete',
         self_care: true,
-        user_id: '',
+        user_id: null,
       },
       tasks: [],
       mood: '',
@@ -45,9 +46,13 @@ class App extends Component {
   async componentDidMount() {
     const user = await verifyUser();
     if (user) {
-      this.setState({
-        currentUser: user
-      })
+      this.setState(prevState => ({
+        currentUser: user,
+        entryFormData: {
+          ...prevState.entryFormData,
+          user_id: user.id,
+        }
+      }))
     }
   }
 
@@ -101,13 +106,6 @@ class App extends Component {
 
   taskHandleSubmit = async (e) => {
     e.preventDefault();
-    this.setState(prevState => ({
-      entryFormData: {
-        ...prevState.entryFormData,
-        user_id: this.state.currentUser.id,
-        type: task,
-      }
-    }))
     const data = this.state.entryFormData;
     const id = this.state.currentUser.id
     const task = await createEntry(data);
@@ -117,8 +115,11 @@ class App extends Component {
     // this.props.history.push('/tasks');
   }
 
-  loadTasks = async () => {
-    const tasks = await fetchEntries();
+  loadTasks = async (id) => {
+    const tasks = await fetchEntries(id);
+    this.setState({
+      tasks: tasks,
+    })
   }
 
   //----MoodForm----//
@@ -173,11 +174,14 @@ class App extends Component {
             handleSubmit={this.moodHandleSubmit}
           />
         )} />
-        <Route exact path="/users/:id/tasks" render={() => (
+        <Route exact path="/users/:id/tasks" render={(props) => (
           <TaskList
             loadTasks={this.loadTasks}
+            tasks={this.state.tasks}
+            id={parseInt(props.match.params.id)}
           />
         )} />
+        <Footer />
       </div>
     )
   }
