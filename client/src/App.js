@@ -8,6 +8,7 @@ import Header from './components/Header';
 import TaskForm from './components/TaskForm';
 import MoodForm from './components/MoodForm';
 import TaskList from './components/TaskList';
+import Footer from './components/Footer';
 
 import {
   loginUser,
@@ -180,6 +181,7 @@ class App extends Component {
             id={parseInt(props.match.params.id)}
           />
         )} />
+        <Footer />
       </div>
     )
   }
