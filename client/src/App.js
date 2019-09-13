@@ -4,10 +4,15 @@ import { withRouter } from 'react-router';
 import decode from 'jwt-decode';
 import Login from './components/Login'
 import Register from './components/Register'
+import Header from './components/Header';
+import TaskForm from './components/TaskForm';
+import TaskList from './components/TaskList';
+
 import {
   loginUser,
   registerUser,
-  verifyUser
+  verifyUser,
+  createEntry
 } from './services/api-helper'
 import './App.css';
 
@@ -20,7 +25,17 @@ class App extends Component {
         name: "",
         email: "",
         password: ""
-      }
+      },
+      entryFormData: {
+        type: '',
+        title: '',
+        details: '',
+        mood: 0,
+        status: 'incomplete',
+        self_care: true,
+        user_id: '',
+      },
+      tasks: [],
     };
   }
 
@@ -70,16 +85,30 @@ class App extends Component {
     }));
   }
 
+  //--------TaskForm--------//
+  entryHandleChange = (e) => {
+    const { name, value } = e.target;
+    this.setState(prevState => ({
+      entryFormData: {
+        ...prevState.entryFormData,
+        [name]: value
+      }
+    }));
+  }
+
+  taskHandleSubmit = async (data) => {
+    const task = await createEntry(data);
+    this.setState(prevState => ({
+      tasks: [...prevState.tasks, task]
+    }))
+    this.props.history.push('/tasks')
+  }
+
   render() {
     return (
       <div className="App">
+        <Header />
         <header>
-          <h1><Link to='/' onClick={() => this.setState({
-            teacherForm: {
-              name: "",
-              photo: ""
-            }
-          })}>School App</Link></h1>
           <div>
             {this.state.currentUser
               ?
@@ -102,9 +131,14 @@ class App extends Component {
             handleRegister={this.handleRegister}
             handleChange={this.authHandleChange}
             formData={this.state.authFormData} />)} />
-       
+        <Route exact path="/add_task" render={() => (
+          <TaskForm
+            formData={this.state.entryFormData}
+            handleChange={this.entryHandleChange}
+          />
+        )} />
       </div>
-    );
+    )
   }
 }
 
