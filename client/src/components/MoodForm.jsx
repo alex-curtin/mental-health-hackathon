@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Button, Radio, Input, TextArea } from 'semantic-ui-react';
 
-export default function EntryForm(props) {
+export default function MoodForm(props) {
   return (
     <div>
       <Form onSubmit={props.handleSubmit}>

@@ -6,6 +6,7 @@ import Login from './components/Login'
 import Register from './components/Register'
 import Header from './components/Header';
 import TaskForm from './components/TaskForm';
+import MoodForm from './components/MoodForm';
 import TaskList from './components/TaskList';
 
 import {
@@ -36,6 +37,7 @@ class App extends Component {
         user_id: '',
       },
       tasks: [],
+      mood: '',
     };
   }
 
@@ -101,7 +103,16 @@ class App extends Component {
     this.setState(prevState => ({
       tasks: [...prevState.tasks, task]
     }))
-    this.props.history.push('/tasks')
+    this.props.history.push('/tasks');
+  }
+
+  //----MoodForm----//
+  moodHandleSubmit = async (data) => {
+    const mood = await createEntry(data);
+    //update user mood
+    this.setState({
+      mood: mood,
+    })
   }
 
   render() {
@@ -135,6 +146,13 @@ class App extends Component {
           <TaskForm
             formData={this.state.entryFormData}
             handleChange={this.entryHandleChange}
+          />
+        )} />
+        <Route exact path="/set_mood" render={() => (
+          <MoodForm
+            formData={this.state.entryFormData}
+            handleChange={this.entryHandleChange}
+            handleSubmit={this.taskHandleSubmit}
           />
         )} />
       </div>

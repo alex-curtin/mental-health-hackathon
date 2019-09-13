@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react'
 
-export default function TaskList() {
-  return (
-    <div>
+export default class TaskList extends Component {
 
-    </div>
-  )
+  componentDidMount() {
+    this.props.loadTasks();
+  }
+
+  render() {
+    return (
+      <div>
+
+      </div>
+    )
+  }
 }
