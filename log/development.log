@@ -2115,3 +2115,26 @@ Processing by UsersController#verify as HTML
 Completed 200 OK in 12ms (Views: 0.2ms | ActiveRecord: 1.7ms)
 
 
+  [1m[35m (3.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2655380578682588925)[0m
+  ↳ bin/rails:9
+  [1m[35m (3.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeColumnInEntries (20190913164559)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (7.1ms)[0m  [1m[35mALTER TABLE "entries" RENAME COLUMN "type" TO "category"[0m
+  ↳ db/migrate/20190913164559_change_column_in_entries.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (1.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190913164559"]]
+  ↳ bin/rails:9
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (1.6ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2655380578682588925)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9

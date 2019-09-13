@@ -1,10 +1,10 @@
 import React from 'react';
-
+import moodcast from '../assets/icons/moodcast.png'
 
 export default function Header() {
   return (
     <div className="header">
-      <h1>MoodCast</h1>
+      <img className="logo" src={moodcast} alt='moodcast' />
     </div>
   )
 }

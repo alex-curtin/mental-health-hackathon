@@ -12,7 +12,7 @@ export default class TaskList extends Component {
   render() {
     return (
       <div>
-        {this.props.tasks.map(task => (
+        {this.props.tasks.filter(el => el.category === 'task').map(task => (
           <div key={task.id}>
             <p><b>{task.title}</b></p>
             <p>{task.details}</p>
