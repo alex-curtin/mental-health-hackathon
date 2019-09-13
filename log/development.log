@@ -1930,3 +1930,188 @@ Processing by AuthenticationController#login as HTML
 Completed 200 OK in 213ms (Views: 0.2ms | ActiveRecord: 0.5ms)
 
 
+Started GET "/users/verify" for ::1 at 2019-09-13 09:42:15 -0400
+  [1m[35m (23.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/kennethofosu/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by UsersController#verify as HTML
+  [1m[36mUser Load (5.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20
+Completed 200 OK in 262ms (Views: 13.5ms | ActiveRecord: 59.5ms)
+
+
+Started POST "/auth/login" for ::1 at 2019-09-13 09:42:37 -0400
+Processing by AuthenticationController#login as HTML
+  Parameters: {"name"=>"fake123", "email"=>"", "password"=>"[FILTERED]", "authentication"=>{"name"=>"fake123", "email"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (4.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT $2[0m  [["name", "fake123"], ["LIMIT", 1]]
+  ↳ app/controllers/authentication_controller.rb:4
+Completed 200 OK in 3499ms (Views: 3.7ms | ActiveRecord: 4.3ms)
+
+
+Started GET "/users/undefined/entries/" for ::1 at 2019-09-13 10:14:04 -0400
+Processing by EntriesController#index as HTML
+  Parameters: {"user_id"=>"undefined"}
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+  ↳ app/controllers/entries_controller.rb:5
+Completed 404 Not Found in 8ms (ActiveRecord: 2.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=undefined):
+  
+app/controllers/entries_controller.rb:5:in `index'
+Started GET "/users/undefined/entries/" for ::1 at 2019-09-13 10:14:32 -0400
+Processing by EntriesController#index as HTML
+  Parameters: {"user_id"=>"undefined"}
+  [1m[36mUser Load (9.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+  ↳ app/controllers/entries_controller.rb:5
+Completed 404 Not Found in 17ms (ActiveRecord: 9.5ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=undefined):
+  
+app/controllers/entries_controller.rb:5:in `index'
+Started POST "/auth/login" for ::1 at 2019-09-13 10:14:49 -0400
+Processing by AuthenticationController#login as HTML
+  Parameters: {"name"=>"fake123", "email"=>"", "password"=>"[FILTERED]", "authentication"=>{"name"=>"fake123", "email"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (3.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT $2[0m  [["name", "fake123"], ["LIMIT", 1]]
+  ↳ app/controllers/authentication_controller.rb:4
+Completed 200 OK in 272ms (Views: 3.5ms | ActiveRecord: 3.9ms)
+
+
+Started GET "/users/verify" for ::1 at 2019-09-13 10:15:29 -0400
+Processing by UsersController#verify as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20
+Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/users/verify" for ::1 at 2019-09-13 10:17:33 -0400
+Processing by UsersController#verify as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20
+Completed 200 OK in 4ms (Views: 0.2ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/users/verify" for ::1 at 2019-09-13 10:18:39 -0400
+Processing by UsersController#verify as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20
+Completed 200 OK in 14ms (Views: 1.4ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/auth/login" for ::1 at 2019-09-13 10:18:54 -0400
+Processing by AuthenticationController#login as HTML
+  Parameters: {"name"=>"fake123", "email"=>"", "password"=>"[FILTERED]", "authentication"=>{"name"=>"fake123", "email"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT $2[0m  [["name", "fake123"], ["LIMIT", 1]]
+  ↳ app/controllers/authentication_controller.rb:4
+Completed 200 OK in 246ms (Views: 1.3ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/users/verify" for ::1 at 2019-09-13 10:20:04 -0400
+Processing by UsersController#verify as HTML
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20
+Completed 200 OK in 16ms (Views: 1.8ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/users/verify" for ::1 at 2019-09-13 10:20:28 -0400
+Processing by UsersController#verify as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20
+Completed 200 OK in 12ms (Views: 0.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/users/verify" for ::1 at 2019-09-13 10:20:32 -0400
+Processing by UsersController#verify as HTML
+  [1m[36mUser Load (2.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20
+Completed 200 OK in 13ms (Views: 0.9ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/users/verify" for ::1 at 2019-09-13 10:20:43 -0400
+Processing by UsersController#verify as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20
+Completed 200 OK in 18ms (Views: 2.0ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/auth/login" for ::1 at 2019-09-13 10:20:54 -0400
+Processing by AuthenticationController#login as HTML
+  Parameters: {"name"=>"fake123", "email"=>"", "password"=>"[FILTERED]", "authentication"=>{"name"=>"fake123", "email"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (9.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT $2[0m  [["name", "fake123"], ["LIMIT", 1]]
+  ↳ app/controllers/authentication_controller.rb:4
+Completed 200 OK in 283ms (Views: 1.2ms | ActiveRecord: 9.4ms)
+
+
+Started GET "/users/verify" for ::1 at 2019-09-13 10:22:21 -0400
+Processing by UsersController#verify as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20
+Completed 200 OK in 27ms (Views: 2.9ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/users/verify" for ::1 at 2019-09-13 10:22:32 -0400
+Processing by UsersController#verify as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20
+Completed 200 OK in 15ms (Views: 1.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users/verify" for ::1 at 2019-09-13 10:22:54 -0400
+Processing by UsersController#verify as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20
+Completed 200 OK in 11ms (Views: 0.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/users/verify" for ::1 at 2019-09-13 10:23:12 -0400
+Processing by UsersController#verify as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20
+Completed 200 OK in 16ms (Views: 0.4ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/users/verify" for ::1 at 2019-09-13 10:23:33 -0400
+Processing by UsersController#verify as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20
+Completed 200 OK in 14ms (Views: 0.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/users/verify" for ::1 at 2019-09-13 10:23:50 -0400
+Processing by UsersController#verify as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20
+Completed 200 OK in 11ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/users/verify" for ::1 at 2019-09-13 10:26:15 -0400
+Processing by UsersController#verify as HTML
+  [1m[36mUser Load (3.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20
+Completed 200 OK in 7ms (Views: 0.9ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/users/verify" for ::1 at 2019-09-13 10:26:29 -0400
+Processing by UsersController#verify as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20
+Completed 200 OK in 10ms (Views: 0.9ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/auth/login" for ::1 at 2019-09-13 10:26:49 -0400
+Processing by AuthenticationController#login as HTML
+  Parameters: {"name"=>"fake123", "email"=>"", "password"=>"[FILTERED]", "authentication"=>{"name"=>"fake123", "email"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT $2[0m  [["name", "fake123"], ["LIMIT", 1]]
+  ↳ app/controllers/authentication_controller.rb:4
+Completed 200 OK in 232ms (Views: 2.0ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/users/verify" for ::1 at 2019-09-13 10:26:58 -0400
+Processing by UsersController#verify as HTML
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20
+Completed 200 OK in 12ms (Views: 0.2ms | ActiveRecord: 1.7ms)
+
+
