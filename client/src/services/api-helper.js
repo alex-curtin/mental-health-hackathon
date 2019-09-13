@@ -32,10 +32,16 @@ export const verifyUser = async () => {
 
 
 /////////// ENTRIES
+export const fetchAllEntries = async () => {
+  const res = await api.get('/entries/all/');
+  return res.data;
+}
+
 export const fetchEntries = async (id) => {
   const res = await api.get(`/users/${id}/entries/`);
   return res.data;
 }
+
 
 export const fetchEntry = async (user_id, id) => {
   const res = await api.get(`/users/${user_id}/entries/${id}`);

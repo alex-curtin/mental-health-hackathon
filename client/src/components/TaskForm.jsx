@@ -21,7 +21,7 @@ const moodOptions = [
 
 export default function EntryForm(props) {
   return (
-    <div>
+    <div lassName="form-page">
       <form onSubmit={props.handleSubmit}>
         <label htmlFor='title'>Title</label>
         <Input

@@ -15,7 +15,7 @@ export default function Footer(props) {
       <Link to={`/users/${props.user.id}/tasks`}>
         <img className="footer-icon" src={task} />
       </Link>
-      <Link>
+      <Link to={`/users/${props.user.id}/moods`}>
         <img className="footer-icon" src={mood} />
       </Link>
       <Link>

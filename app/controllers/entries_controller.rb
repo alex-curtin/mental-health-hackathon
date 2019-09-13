@@ -1,5 +1,5 @@
 class EntriesController < ApplicationController
-  before_action :authorize_request, except: %i[index show recent search]
+  before_action :authorize_request, except: %i[index show recent search show_all]
   
   def index
     @user = User.find(params[:user_id])
@@ -11,6 +11,11 @@ class EntriesController < ApplicationController
     @user = User.find(params[:user_id])
     @entry = Entry.find(params[:id])
     render json: @entry, status: :ok
+  end
+
+  def show_all
+    @entries = Entry.all.includes(:user)
+    render json: @entries, :include => {:user => {:only => %i[name]}}, status: :ok
   end
 
   def recent

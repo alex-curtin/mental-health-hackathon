@@ -9,6 +9,8 @@ import TaskForm from './components/TaskForm';
 import MoodForm from './components/MoodForm';
 import TaskList from './components/TaskList';
 import Footer from './components/Footer';
+import Home from './components/Home';
+import MoodList from './components/MoodList';
 
 import feed from './assets/icons/feed-grey.png';
 import task from './assets/icons/task-grey.png';
@@ -20,7 +22,8 @@ import {
   registerUser,
   verifyUser,
   createEntry,
-  fetchEntries
+  fetchEntries,
+  fetchAllEntries
 } from './services/api-helper'
 import './App.css';
 
@@ -54,6 +57,7 @@ class App extends Component {
       },
       tasks: [],
       mood: '',
+      feed: '',
     };
   }
 
@@ -161,6 +165,14 @@ class App extends Component {
   }
 
 
+  //---------FEED-------------//
+  loadFeed = async () => {
+    const feed = await fetchAllEntries();
+    this.setState({
+      feed: feed,
+    })
+  }
+
 
   render() {
     return (
@@ -179,6 +191,14 @@ class App extends Component {
             }
           </div>
         </header>
+        <Route exact path="/" render={() => (
+          <Home
+            loadFeed={this.loadFeed}
+            feed={this.state.feed}
+          />
+        )}
+
+        />
         <Route exact path="/login" render={() => (
           <Login
             handleLogin={this.handleLogin}
@@ -201,6 +221,13 @@ class App extends Component {
             formData={this.state.moodFormData}
             handleChange={this.moodHandleChange}
             handleSubmit={this.moodHandleSubmit}
+          />
+        )} />
+        <Route exact path="/users/:id/moods" render={(props) => (
+          <MoodList
+            loadTasks={this.loadTasks}
+            tasks={this.state.tasks}
+            id={parseInt(props.match.params.id)}
           />
         )} />
         <Route exact path="/users/:id/tasks" render={(props) => (
