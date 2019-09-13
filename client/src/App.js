@@ -178,6 +178,11 @@ class App extends Component {
             loadTasks={this.loadTasks}
           />
         )} />
+        <Route exact path="/users/:id/moods" render={() => (
+          <TaskList
+            loadTasks={this.loadTasks}
+          />
+        )} />
       </div>
     )
   }
