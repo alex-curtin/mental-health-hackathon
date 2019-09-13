@@ -1,57 +1,61 @@
 import React from 'react';
 import { Form, Button, Radio, Input, TextArea } from 'semantic-ui-react';
 
+const moodOptions = [
+  {
+    key: "happy",
+    text: "happy",
+    value: "happy",
+  },
+  {
+    key: "neutral",
+    text: "neutral",
+    value: "neutral",
+  },
+  {
+    key: "stressed",
+    text: "stressed",
+    value: "stressed",
+  }
+]
+
 export default function MoodForm(props) {
   return (
     <div>
-      <Form onSubmit={props.handleSubmit}>
-        <label htmlFor='title'>Title</label>
-        <Input
-          type="string"
-          name='title'
-          value={props.formData.title}
+      <form onSubmit={props.handleSubmit}>
+        <label htmlFor="mood">How are you feeling:</label>
+        <select
           onChange={props.handleChange}
-          placeholder='title'
-        />
-        <label htmlFor="details">Details</label>
+          placeholder="select your mood"
+          value={props.formData.mood}
+          name="mood"
+        >
+          {moodOptions.map(option => (
+            <option
+              key={option.key}
+              value={option.value}
+            >{option.text}</option>
+          ))}
+        </select>
+        <label htmlFor="details">Comments</label>
         <TextArea
           name='details'
           value={props.formData.details}
           onChange={props.handleChange}
           placeholder='details'
         />
-        <Form.Group>
-          <label>Mood</label>
-          <Form.Field
-            control={Radio}
-            value='-1'
-          />
-          <Form.Field
-            control={Radio}
-            label='0'
-            value='0'
-          />
-          <Form.Field
-            control={Radio}
-            label='1'
-            value='1'
-          />
-        </Form.Group>
-        <Form.Group>
-          <label>Have you taken time for yourself:</label>
-          <Form.Field
-            control={Radio}
-            label='Yes'
-            value={true}
-          />
-          <Form.Field
-            control={Radio}
-            label='No'
-            value={false}
-          />
-        </Form.Group>
+        <label htmlFor="self_care">Have you taken time for yourself:</label>
+        <select
+          onChange={props.handleChange}
+          placeholder={'yes'}
+          value={props.formData.self_care}
+          name='self_care'
+        >
+          <option key="Yes" value="Yes">Yes</option>
+          <option key="No" value="No">No</option>
+        </select>
         <Button>Submit</Button>
-      </Form>
+      </form>
     </div>
   )
 }

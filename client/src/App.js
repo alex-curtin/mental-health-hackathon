@@ -10,6 +10,11 @@ import MoodForm from './components/MoodForm';
 import TaskList from './components/TaskList';
 import Footer from './components/Footer';
 
+import feed from './assets/icons/feed-grey.png';
+import task from './assets/icons/task-grey.png';
+import mood from './assets/icons/mood-grey.png';
+import prof from './assets/icons/prof-grey.png';
+
 import {
   loginUser,
   registerUser,
@@ -29,12 +34,21 @@ class App extends Component {
         email: "",
         password: ""
       },
-      entryFormData: {
-        type: '',
+      taskFormData: {
+        category: 'task',
         title: '',
         details: '',
         mood: 'neutral',
         status: 'incomplete',
+        self_care: true,
+        user_id: null,
+      },
+      moodFormData: {
+        category: 'mood',
+        title: '',
+        details: '',
+        mood: 'neutral',
+        status: '',
         self_care: true,
         user_id: null,
       },
@@ -48,9 +62,13 @@ class App extends Component {
     if (user) {
       this.setState(prevState => ({
         currentUser: user,
-        entryFormData: {
-          ...prevState.entryFormData,
+        taskFormData: {
+          ...prevState.taskFormData,
           user_id: user.id,
+        },
+        moodFormData: {
+          ...prevState.moodFormData,
+          user_id: user.id
         }
       }))
     }
@@ -97,8 +115,18 @@ class App extends Component {
   entryHandleChange = (e) => {
     const { name, value } = e.target;
     this.setState(prevState => ({
-      entryFormData: {
-        ...prevState.entryFormData,
+      taskFormData: {
+        ...prevState.taskFormData,
+        [name]: value
+      }
+    }));
+  }
+
+  moodHandleChange = (e) => {
+    const { name, value } = e.target;
+    this.setState(prevState => ({
+      moodFormData: {
+        ...prevState.moodFormData,
         [name]: value
       }
     }));
@@ -106,8 +134,7 @@ class App extends Component {
 
   taskHandleSubmit = async (e) => {
     e.preventDefault();
-    const data = this.state.entryFormData;
-    const id = this.state.currentUser.id
+    const data = this.state.taskFormData;
     const task = await createEntry(data);
     this.setState(prevState => ({
       tasks: [...prevState.tasks, task]
@@ -123,7 +150,9 @@ class App extends Component {
   }
 
   //----MoodForm----//
-  moodHandleSubmit = async (data) => {
+  moodHandleSubmit = async (e) => {
+    e.preventDefault();
+    const data = this.state.moodFormData;
     const mood = await createEntry(data);
     //update user mood
     this.setState({
@@ -162,15 +191,15 @@ class App extends Component {
             formData={this.state.authFormData} />)} />
         <Route exact path="/add_task" render={() => (
           <TaskForm
-            formData={this.state.entryFormData}
+            formData={this.state.taskFormData}
             handleChange={this.entryHandleChange}
             handleSubmit={this.taskHandleSubmit}
           />
         )} />
         <Route exact path="/set_mood" render={() => (
           <MoodForm
-            formData={this.state.entryFormData}
-            handleChange={this.entryHandleChange}
+            formData={this.state.moodFormData}
+            handleChange={this.moodHandleChange}
             handleSubmit={this.moodHandleSubmit}
           />
         )} />
@@ -181,7 +210,10 @@ class App extends Component {
             id={parseInt(props.match.params.id)}
           />
         )} />
-        <Footer />
+        {this.state.currentUser &&
+          <Footer
+            user={this.state.currentUser}
+          />}
       </div>
     )
   }

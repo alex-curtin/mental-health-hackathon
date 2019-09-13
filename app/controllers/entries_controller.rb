@@ -42,7 +42,7 @@ class EntriesController < ApplicationController
   private
 
   def entry_params
-    params.require(:entry).permit(:type, :title, :details, :mood, :status, :self_care, :user_id)
+    params.require(:entry).permit(:category, :title, :details, :mood, :status, :self_care, :user_id)
   end
 
 end
